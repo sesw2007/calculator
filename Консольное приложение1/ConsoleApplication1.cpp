@@ -11,20 +11,13 @@ double number();
 int main()
 {
 	double n;
-
-
-
 	cout << "Vedite zadachu ";
-
 	n = expression();
-
 	cout << setprecision(12) << "Rezyltat: " << n << endl;
-
 	cin.get();
 	cin.get();
 	return 0;
 }
-
 double expression()
 {
 	double result;
@@ -35,7 +28,6 @@ double expression()
 	while (true)
 	{
 		operation = cin.get();
-
 		switch (operation)
 		{
 		case '+':
@@ -50,19 +42,15 @@ double expression()
 		}
 	}
 }
-
 double term()
 {
 	double result;
 	char operation;
 	double temp;
-
 	result = power();
-
 	while (true)
 	{
 		operation = cin.get();
-
 		switch (operation)
 		{
 		case '*':
@@ -76,7 +64,6 @@ double term()
 				cout << "Delenie na 0!" << endl;
 				exit(-1);
 			}
-
 			result /= temp;
 			break;
 		default:
@@ -85,22 +72,17 @@ double term()
 		}
 	}
 }
-
 double power()
 {
 	double result;
 	char operation;
 	vector < double > args;
-
 	args.push_back(factor());
-
 	while (true)
 	{
 		operation = cin.get();
-
 		while (operation == ' ')
 			operation = cin.get();
-
 		if (operation == '^')
 			args.push_back(factor());
 		else
@@ -109,24 +91,18 @@ double power()
 			break;
 		}
 	}
-
 	for (int i = args.size() - 1; i > 0; i--)
 		args[i - 1] = pow(args[i - 1], args[i]);
-
 	return args[0];
 }
-
 double factor()
 {
 	double result;
 	char bracket;
 	int sign = 1;
-
 	bracket = std::cin.get();
-
 	while (bracket == ' ')
 		bracket = cin.get();
-
 	switch (bracket)
 	{
 	case '-':
@@ -135,15 +111,12 @@ double factor()
 		bracket = cin.get();
 		break;
 	}
-
 	while (bracket == ' ')
 		bracket = cin.get();
-
 	if (bracket == '(')
 	{
 		result = expression();
 		bracket = std::cin.get();
-
 		if (bracket != ')')
 		{
 			cout << "Skobki neverno stojat" << std::endl;
@@ -158,16 +131,13 @@ double factor()
 
 	return sign * result;
 }
-
 double number()
 {
 	double result = 0.0;
 	char digit;
 	double k = 10.0;
 	int sign = 1;
-
 	digit = cin.get();
-
 	switch (digit)
 	{
 	case '-':
@@ -176,14 +146,11 @@ double number()
 	default:
 		if (digit != '+')
 			cin.putback(digit);
-
 		break;
 	}
-
 	while (true)
 	{
 		digit = cin.get();
-
 		while (digit == ' ')
 			digit = cin.get();
 
@@ -195,15 +162,12 @@ double number()
 			break;
 		}
 	}
-
 	digit = cin.get();
-
 	if (digit == '.')
 	{
 		while (true)
 		{
 			digit = cin.get();
-
 			while (digit == ' ')
 				digit = cin.get();
 
@@ -221,6 +185,5 @@ double number()
 	}
 	else
 		cin.putback(digit);
-
 	return sign * result;
 }
